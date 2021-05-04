@@ -1,3 +1,5 @@
+const genreForm = document.getElementById("genre-form")
+
 class Genre {
 
 }
@@ -15,11 +17,33 @@ function appendGenres(genres) {
         const li = document.createElement("li")
         li.innerText = genre.name
         genresDiv.append(li)
-
         appendMovies(genre.movies, li)
     }
 }
 
-function postGenre() {
+
+
+function postGenre(e) {
+    e.preventDefault()
+
+    const userInput = e.target.children[1].value
+    const body = {
+        genre: {
+            name: userInput
+        }
+    }
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+
+        },
+        body: JSON.stringify(body)
+    }
+
+    fetch("http://localhost:3000/genres", options)
+        .then(resp => resp.json())
+        .then(genre => genre)
 
 }
