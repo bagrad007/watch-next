@@ -8,8 +8,17 @@ class Genre {
 
     }
 
+    static appendGenres(genres) {
+        debugger
+        for (let genre of genres) {
+            let newGenre = new Genre(genre)
+            newGenre.appendGenre()
+
+        }
+    }
 
     appendGenre() {
+        debugger
         const genresDiv = document.getElementById("genres")
         const li = document.createElement("li")
         li.innerText = this.name
@@ -18,38 +27,30 @@ class Genre {
         genreShow.id = "genreShow"
         genreShow.className = "btn btn-info"
         li.append(genreShow)
-        genreShow.addEventListener("click", this.renderMovies())
+        genreShow.addEventListener("click", this.renderMovies.bind(this))
         genresDiv.append(li)
         appendMovies(this.movies, li)
-    }
-
-    static fetchGenres() {
-        fetch("http://localhost:3000/genres")
-            .then(resp => resp.json())
-            .then(this.appendGenres)
-    }
-
-
-    static appendGenres(genres) {
-        for (let genre of genres) {
-            let newGenre = new Genre(genres)
-            newGenre.appendGenre()
-            appendGenre(genre)
-        }
     }
 
     renderMovies() {
         const genreContainer = document.getElementById("genre-container")
         genreContainer.children[1].innerHTML = ""
         genreContainer.children[0].remove()
-        appendGenre(genre)
         const showButton = document.getElementById("genreShow")
         showButton.remove()
-
-        appendMovieForm()
-
-
+        this.appendGenre()
+        // appendMovieForm()
     }
+
+    static fetchGenres() {
+        fetch("http://localhost:3000/genres")
+            .then(resp => resp.json())
+
+            .then(this.appendGenres)
+    }
+
+
+
 }
 
 
