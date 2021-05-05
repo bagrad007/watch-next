@@ -14,6 +14,8 @@ function appendMovies(movies, el) {
         movieLi.innerText = movie.name
         ul.append(movieLi)
 
+
+
         const movieDelete = document.createElement("button")
         movieDelete.className = "btn btn-danger"
         movieDelete.innerText = "Delete"
@@ -21,6 +23,28 @@ function appendMovies(movies, el) {
         movieDelete.addEventListener("click", () => deleteMovie(movie.id, movieLi))
     }
 }
+
+
+function appendMovieForm() {
+    const genres = document.getElementById("genres")
+    const movieForm = `
+        <form id="movieForm">
+        <label>Add a Movie</label>
+        <input id="movieName">
+        <input type="submit" value="Add Movie">
+        </form>
+    `
+
+    genres.innerHTML += movieForm
+    document.getElementById(movieForm).addEventListener("submit", addMovie)
+}
+
+function addMovie(e) {
+    e.preventDefault()
+
+}
+
+
 
 function deleteMovie(movieId, movieLi) {
     fetch(`http://localhost:3000/genres/${movieId}`, {

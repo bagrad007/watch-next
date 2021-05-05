@@ -1,3 +1,3 @@
 genreForm.addEventListener("submit", postGenre)
 
-fetchGenres()
+Genre.fetchGenres()
