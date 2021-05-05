@@ -9,7 +9,6 @@ class Genre {
     }
 
     static appendGenres(genres) {
-        debugger
         for (let genre of genres) {
             let newGenre = new Genre(genre)
             newGenre.appendGenre()
@@ -18,7 +17,7 @@ class Genre {
     }
 
     appendGenre() {
-        debugger
+
         const genresDiv = document.getElementById("genres")
         const li = document.createElement("li")
         li.innerText = this.name
@@ -36,10 +35,11 @@ class Genre {
         const genreContainer = document.getElementById("genre-container")
         genreContainer.children[1].innerHTML = ""
         genreContainer.children[0].remove()
-        const showButton = document.getElementById("genreShow")
-        showButton.remove()
         this.appendGenre()
-        // appendMovieForm()
+        const showButton = document.getElementById("genreShow")
+
+        showButton.remove()
+        appendMovieForm()
     }
 
     static fetchGenres() {
@@ -50,43 +50,40 @@ class Genre {
     }
 
 
-
-}
-
-
-
-
-
-
-
-
-
-function postGenre(e) {
-    e.preventDefault()
-
-    const userInput = e.target.children[1].value
-    const body = {
-        genre: {
-            name: userInput
+    static postGenre(e) {
+        e.preventDefault()
+        const userInput = e.target.children[1].value
+        const body = {
+            genre: {
+                name: userInput
+            }
         }
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+
+            },
+            body: JSON.stringify(body)
+        }
+
+        e.target.reset()
+
+        fetch("http://localhost:3000/genres", options)
+            .then(resp => resp.json())
+            .then(genre => {
+                let newGenre = new Genre(genre)
+                newGenre.appendGenre()
+            })
     }
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-
-        },
-        body: JSON.stringify(body)
-    }
-
-    e.target.reset()
-
-    fetch("http://localhost:3000/genres", options)
-        .then(resp => resp.json())
-        .then(genre => {
-            let newGenre = new Genre(genre)
-            newGenre.appendGenre()
-        })
-
 }
+
+
+
+
+
+
+
+
+

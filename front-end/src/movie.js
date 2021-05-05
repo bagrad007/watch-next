@@ -31,7 +31,7 @@ function appendMovieForm() {
         <form id="movieForm">
         <label>Add a Movie</label>
         <input id="movieName">
-        <input type="submit" value="Add Movie">
+        <button class="btn btn-primary">Submit</button>
         </form>
     `
 
