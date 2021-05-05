@@ -18,13 +18,13 @@ function appendMovies(movies, el) {
         movieDelete.className = "btn btn-danger"
         movieDelete.innerText = "Delete"
         movieLi.append(movieDelete)
-        movieDelete.addEventListener("click", () => deleteMovie(movie.id))
+        movieDelete.addEventListener("click", () => deleteMovie(movie.id, movieLi))
     }
 }
 
-function deleteMovie(movieId) {
+function deleteMovie(movieId, movieLi) {
     fetch(`http://localhost:3000/genres/${movieId}`, {
         method: "DELETE"
     }).then(resp => resp.json())
-        .then(m => console.log(m))
+        .then(m => movieLi.remove())
 }
