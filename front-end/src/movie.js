@@ -14,6 +14,7 @@ class Movie {
     appendMovie(ul) {
         const movieLi = document.createElement("li")
         movieLi.innerText = this.name
+        // debugger
 
 
         const movieDelete = document.createElement("button")
@@ -21,10 +22,10 @@ class Movie {
         movieDelete.innerText = "Delete"
         movieDelete.id = this.id
 
+        ul.appendChild(movieLi)
+        movieLi.appendChild(movieDelete)
 
-        ul.append(movieLi)
-        movieLi.append(movieDelete)
-        movieDelete.addEventListener("click", e => {
+        movieDelete.addEventListener("click", function () {
             this.deleteMovie(movieLi)
         })
 
@@ -65,7 +66,8 @@ class Movie {
         fetch("http://localhost:3000/movies", options)
             .then(resp => resp.json())
             .then(movie => {
-                let ul = document.getElementById(`genre-${this.genre_id}`)
+                let ul = document.getElementById(`genre-${this.children[2].id}`)
+                debugger
                 let newMovie = new Movie(movie)
                 newMovie.appendMovie(ul)
             })
