@@ -7,21 +7,7 @@ class Movie {
         this.genreId = genre_id
     }
 
-    static appendMovieForm() {
-        const genres = document.getElementById("genres")
 
-        const movieForm = `
-        <form id="movieForm">
-        <label>Add a Movie</label>
-        <input id="movieName">
-        <input type="submit" class="btn btn-primary" value="Submit">
-        </form>
-        `
-        genres.innerHTML += movieForm
-        document.getElementById(movieForm).addEventListener("submit", Movie.addMovie)
-
-
-    }
 
 
 
@@ -29,19 +15,19 @@ class Movie {
         const movieLi = document.createElement("li")
         movieLi.innerText = this.name
 
+
         const movieDelete = document.createElement("button")
         movieDelete.className = "btn btn-danger"
         movieDelete.innerText = "Delete"
         movieDelete.id = this.id
 
 
+        ul.append(movieLi)
         movieLi.append(movieDelete)
         movieDelete.addEventListener("click", e => {
-
             this.deleteMovie(movieLi)
         })
 
-        ul.append(movieLi)
 
     }
 
@@ -56,9 +42,36 @@ class Movie {
 
     static addMovie(e) {
         e.preventDefault()
-        debugger
+        const userInput = e.target.children[1].value
+        const inputId = e.target.children[2].id
+        const body = {
+            movie: {
+                name: userInput,
+                genre_id: inputId
+            }
+        }
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+
+            },
+            body: JSON.stringify(body)
+        }
+
+        e.target.reset()
+
+        fetch("http://localhost:3000/movies", options)
+            .then(resp => resp.json())
+            .then(movie => {
+                let ul = document.getElementById(`genre-${this.genre_id}`)
+                let newMovie = new Movie(movie)
+                newMovie.appendMovie(ul)
+            })
     }
 }
+
 
 
 
