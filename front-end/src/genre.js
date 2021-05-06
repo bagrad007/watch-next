@@ -54,7 +54,7 @@ class Genre {
         genreContainer.children[0].remove()
 
         this.appendGenre()
-        const showButton = document.getElementById("genreShow")
+        const showButton = document.getElementById(`genreShow-${this.id}`)
 
         showButton.remove()
         Movie.appendMovieForm()

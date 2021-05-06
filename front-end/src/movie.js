@@ -14,14 +14,13 @@ class Movie {
         <form id="movieForm">
         <label>Add a Movie</label>
         <input id="movieName">
-        <button class="btn btn-primary">Submit</button>
+        <input type="submit" class="btn btn-primary" value="Submit">
         </form>
         `
-
         genres.innerHTML += movieForm
-
-
         document.getElementById(movieForm).addEventListener("submit", Movie.addMovie)
+
+
     }
 
 
@@ -57,7 +56,7 @@ class Movie {
 
     static addMovie(e) {
         e.preventDefault()
-
+        debugger
     }
 }
 
