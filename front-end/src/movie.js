@@ -1,14 +1,14 @@
 
 
 class Movie {
+    static allMovies = []
+
     constructor({ name, id, genre_id }) {
         this.name = name
         this.id = id
         this.genreId = genre_id
+        Movie.allMovies.push(this)
     }
-
-
-
 
 
     appendMovie(ul) {
@@ -20,13 +20,13 @@ class Movie {
         movieDelete.className = "btn btn-danger"
         movieDelete.innerText = "Delete"
         movieDelete.id = this.id
+        movieDelete.addEventListener("click", () => {
+            this.deleteMovie(movieLi)
+        })
 
         ul.appendChild(movieLi)
         movieLi.appendChild(movieDelete)
 
-        movieDelete.addEventListener("click", () => {
-            this.deleteMovie(movieLi)
-        })
 
 
     }
@@ -37,6 +37,7 @@ class Movie {
         }).then(resp => resp.json())
             .then(m => {
                 document.getElementById(movieLi.id).remove()
+                Movie.allMovies = Movie.allMovies.filter(movie => movie.id !== this.id)
             })
     }
 

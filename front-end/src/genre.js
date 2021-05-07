@@ -1,12 +1,22 @@
-const genreForm = document.getElementById("genre-form")
+// const homeButton = document.getElementById("homeButton")
+// homeButton.addEventListener("click", renderHome)
 
 class Genre {
+    static allGenres = []
+
     constructor({ name, id, movies }) {
         this.name = name
         this.id = id
-        this.movies = movies.map(movie => new Movie(movie))
+        debugger
+        movies.forEach(movie => new Movie(movie))
+        Genre.allGenres.push(this)
 
     }
+
+    get movies() {
+        return Movie.allMovies.filter(movie => movie.genreId === this.id)
+    }
+
 
     static fetchGenres() {
         fetch("http://localhost:3000/genres")
@@ -16,6 +26,8 @@ class Genre {
     }
 
     static appendGenres(genres) {
+        const homeButton = document.getElementById("homeButton")
+        homeButton.addEventListener("click", renderHome)
 
         for (let genre of genres) {
             let newGenre = new Genre(genre)
@@ -24,13 +36,9 @@ class Genre {
         }
     }
 
-    appendMovies(el) {
-        const ul = document.createElement("ul")
-        ul.id = `genre-${this.id}`
-        el.append(ul)
-
-        for (let movie of this.movies) {
-            movie.appendMovie(ul)
+    static appendGenresForHomeButton() {
+        for (let genre of Genre.allGenres) {
+            genre.appendGenre()
         }
     }
 
@@ -49,11 +57,23 @@ class Genre {
         this.appendMovies(div)
     }
 
+    appendMovies(el) {
+        const ul = document.createElement("ul")
+        ul.id = `genre-${this.id}`
+        el.append(ul)
+
+        for (let movie of this.movies) {
+            movie.appendMovie(ul)
+        }
+    }
+
+
     renderMovies() {
         const genreContainer = document.getElementById("genre-container")
         genreContainer.children[1].innerHTML = ""
         genreContainer.children[0].remove()
-
+        const homeButton = document.getElementById("homeButton")
+        homeButton.addEventListener("click", renderHome)
 
         this.appendGenre()
         const showButton = document.getElementById(`genreShow-${this.id}`)
