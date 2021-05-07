@@ -96,8 +96,6 @@ class Genre {
         `
         genres.innerHTML += movieForm
         document.getElementById("movieForm").addEventListener("submit", Movie.addMovie)
-
-
     }
 
 

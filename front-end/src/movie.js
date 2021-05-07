@@ -32,7 +32,6 @@ class Movie {
             method: "DELETE"
         }).then(resp => resp.json())
             .then(m => {
-
                 document.getElementById(movieLi.id).remove()
                 Movie.allMovies = Movie.allMovies.filter(movie => movie.id !== this.id)
             })

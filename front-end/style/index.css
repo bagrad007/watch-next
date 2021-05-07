@@ -13,3 +13,7 @@ li {
     grid-template-columns: auto;
     
 }
+
+#movieForm {
+    display: inline-block;
+}
