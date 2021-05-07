@@ -6,7 +6,7 @@ class GenresController < ApplicationController
 
   def create
     genre = Genre.create(genre_params)
-    render json: genre, only: [:id, :name], include: :movies
+    render json: genre, include: :movies
   end
 
   def destroy

@@ -1,3 +1,15 @@
 #homeButton {
     cursor: pointer
 }
+
+.navbar-brand{
+    cursor: default
+}
+
+ul {
+    columns: auto;
+}
+li {
+    grid-template-columns: auto;
+    
+}

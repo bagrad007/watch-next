@@ -1,6 +1,3 @@
-// const homeButton = document.getElementById("homeButton")
-// homeButton.addEventListener("click", renderHome)
-
 class Genre {
     static allGenres = []
 
@@ -46,11 +43,12 @@ class Genre {
 
         const genresDiv = document.getElementById("genres")
         const div = document.createElement("div")
+        div.className = "row"
         div.innerText = this.name
         const genreShow = document.createElement("button")
         genreShow.innerText = "Edit Movies"
         genreShow.id = `genreShow-${this.id}`
-        genreShow.className = "btn btn-info"
+        genreShow.className = "btn btn-info col-1"
         div.append(genreShow)
         genreShow.addEventListener("click", this.renderMovies.bind(this))
         genresDiv.append(div)
@@ -72,14 +70,17 @@ class Genre {
         const genreContainer = document.getElementById("genre-container")
         genreContainer.children[1].innerHTML = ""
         genreContainer.children[0].remove()
+
         const homeButton = document.getElementById("homeButton")
         homeButton.addEventListener("click", renderHome)
 
-        this.appendGenre()
-        const showButton = document.getElementById(`genreShow-${this.id}`)
-
-        showButton.remove()
         this.appendMovieForm()
+        this.appendGenre()
+
+        const showButton = document.getElementById(`genreShow-${this.id}`)
+        showButton.remove()
+
+
     }
 
     appendMovieForm() {

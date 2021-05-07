@@ -1,5 +1,3 @@
-
-
 class Movie {
     static allMovies = []
 
@@ -15,6 +13,8 @@ class Movie {
         const movieLi = document.createElement("li")
         movieLi.innerText = this.name
         movieLi.id = `li-${this.id}`
+        movieLi.className = "col-sm"
+        ul.appendChild(movieLi)
 
         const movieDelete = document.createElement("button")
         movieDelete.className = "btn btn-danger"
@@ -24,11 +24,7 @@ class Movie {
             this.deleteMovie(movieLi)
         })
 
-        ul.appendChild(movieLi)
         movieLi.appendChild(movieDelete)
-
-
-
     }
 
     deleteMovie(movieLi) {
@@ -36,6 +32,7 @@ class Movie {
             method: "DELETE"
         }).then(resp => resp.json())
             .then(m => {
+
                 document.getElementById(movieLi.id).remove()
                 Movie.allMovies = Movie.allMovies.filter(movie => movie.id !== this.id)
             })
@@ -66,6 +63,7 @@ class Movie {
         fetch("http://localhost:3000/movies", options)
             .then(resp => resp.json())
             .then(movie => {
+
                 let ul = document.getElementById(`genre-${this.children[2].id}`)
                 let newMovie = new Movie(movie)
                 newMovie.appendMovie(ul)
