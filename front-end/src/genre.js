@@ -7,7 +7,7 @@ class Genre {
     constructor({ name, id, movies }) {
         this.name = name
         this.id = id
-        debugger
+
         movies.forEach(movie => new Movie(movie))
         Genre.allGenres.push(this)
 
@@ -123,6 +123,7 @@ class Genre {
         fetch("http://localhost:3000/genres", options)
             .then(resp => resp.json())
             .then(genre => {
+                debugger
                 let newGenre = new Genre(genre)
                 newGenre.appendGenre()
             })
