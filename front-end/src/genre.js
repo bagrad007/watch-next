@@ -122,7 +122,6 @@ class Genre {
         fetch("http://localhost:3000/genres", options)
             .then(resp => resp.json())
             .then(genre => {
-                debugger
                 let newGenre = new Genre(genre)
                 newGenre.appendGenre()
             })
