@@ -17,3 +17,4 @@ function renderHome() {
     genreForm.addEventListener("submit", Genre.postGenre)
     Genre.appendGenresForHomeButton()
 }
+
