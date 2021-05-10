@@ -10,7 +10,9 @@ function renderHome() {
             <input type="text">
             <button class="btn btn-primary">Submit</button>
         </form>
-    <div id="genres" class="container"></div>`
+    <div id="genres" class="container">
+    
+    </div>`
     genreForm = document.getElementById("genre-form")
     genreForm.addEventListener("submit", Genre.postGenre)
     Genre.appendGenresForHomeButton()

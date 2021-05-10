@@ -13,7 +13,6 @@ class Movie {
         const movieLi = document.createElement("li")
         movieLi.innerText = this.name
         movieLi.id = `li-${this.id}`
-        movieLi.className = "col-sm"
         ul.appendChild(movieLi)
 
         const movieDelete = document.createElement("button")
