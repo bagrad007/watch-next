@@ -19,7 +19,10 @@ After bundle is finished, start the rails server with:
 
     rails s
 
-Then on your browser visit localhost:3000. 
+Then in your terminal, cd into the front end directory, and type this in your terminal: 
+
+    open index.html
+
 You'll then see the app!
 
 ## Contributing 
